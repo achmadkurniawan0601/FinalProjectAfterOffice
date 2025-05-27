@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mochawesome Report</title>
+    <link rel="stylesheet" href="assets\app.css" />
+  </head>
+  <body
+    data-raw='{"stats":{"suites":1,"tests":1,"passes":1,"pending":0,"failures":0,"start":"2025-05-27T10:01:42.566Z","end":"2025-05-27T10:02:22.639Z","duration":40073,"testsRegistered":1,"passPercent":100,"pendingPercent":0,"other":0,"hasOther":false,"skipped":0,"hasSkipped":false},"results":[{"uuid":"868c27c6-6472-4a33-ad6e-cbc3b43fa06a","title":"","fullFile":"cypress\\e2e\\amazon.cy.js","file":"cypress\\e2e\\amazon.cy.js","beforeHooks":[],"afterHooks":[],"tests":[],"suites":[{"uuid":"2e1cc0ab-2f32-4f48-82d5-7af1e78b1e1a","title":"Amazon","fullFile":"","file":"","beforeHooks":[],"afterHooks":[],"tests":[{"title":"Checkout Chair Item","fullTitle":"Amazon Checkout Chair Item","duration":34893,"state":"passed","speed":"slow","pass":true,"fail":false,"pending":false,"code":"cy.viewport(1920, 1080);\n// try {\n//   cy.get(\".a-button-input\").click();\n// } catch (error) {}\ncy.get(\"#nav-bb-search\").type(\"chair\");\ncy.get(\".nav-bb-button\").click();\ncy.get(\"#a-autoid-0-announce\").click();\ncy.get(\"#s-result-sort-select_2\").click();\ncy.contains(\"Office Chair Leather Home Desk 360° Rotating Office Chair\").click();\ncy.get(\"#title &gt; #productTitle\").should(\"contain.text\", \"Office Chair Leather Home Desk 360° Rotating Office Chair\");\ncy.get(&#x27;.a-spacing-none &gt; .a-price &gt; [aria-hidden=\"true\"] &gt; .a-price-whole&#x27;).should(\"contain.text\", \"39\");","err":{},"uuid":"22eef9cd-1a8f-4c7d-b50a-5c98f2895e9c","parentUUID":"2e1cc0ab-2f32-4f48-82d5-7af1e78b1e1a","isHook":false,"skipped":false}],"suites":[],"passes":["22eef9cd-1a8f-4c7d-b50a-5c98f2895e9c"],"failures":[],"pending":[],"skipped":[],"duration":34893,"root":false,"rootEmpty":false,"_timeout":2000}],"passes":[],"failures":[],"pending":[],"skipped":[],"duration":0,"root":true,"rootEmpty":true,"_timeout":2000}],"meta":{"mocha":{"version":"7.0.1"},"mochawesome":{"options":{"quiet":false,"reportFilename":"mochawesome","saveHtml":true,"saveJson":false,"consoleReporter":"spec","useInlineDiffs":false,"code":true},"version":"7.1.3"},"marge":{"options":{"reportDir":"cypress/reports/html","overwrite":false,"html":true,"json":false},"version":"6.2.0"}}}'
+    data-config='{"reportFilename":"mochawesome","reportDir":"cypress/reports/html","reportTitle":"FixSauceDemo2","reportPageTitle":"Mochawesome Report","inline":false,"inlineAssets":false,"cdn":false,"charts":false,"enableCharts":false,"code":true,"enableCode":true,"autoOpen":false,"overwrite":false,"timestamp":false,"ts":false,"showPassed":true,"showFailed":true,"showPending":true,"showSkipped":false,"showHooks":"failed","saveJson":false,"saveHtml":true,"dev":false,"assetsDir":"cypress\\reports\\html\\assets","htmlFile":"E:\\cypress\\WoW\\Cypress\\FixSauceDemo2\\cypress\\reports\\html\\mochawesome.html"}'
+  >
+    <div id="report"></div>
+    <script src="assets\app.js"></script>
+  </body>
+</html>

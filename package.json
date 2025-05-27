@@ -1,0 +1,20 @@
+{
+  "name": "belajarcypress10072024",
+  "version": "1.0.0",
+  "description": "cypress automation test",
+  "main": "index.js",
+  "scripts": {
+    "webtest": "npx cypress run --browser chrome --spec 'cypress/e2e/4-Web-Testing/*'",
+    "orange": "npx cypress run --spec 'cypress/e2e/4-Web-Testing/orangeHRM.cy.js'",
+    "reqres": "npx cypress run --spec 'cypress/e2e/3-APITesting/reqres.cy.js'"
+  },
+  "author": "AchmadKurniawan",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.13.0",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.2.0"
+  }
+}
