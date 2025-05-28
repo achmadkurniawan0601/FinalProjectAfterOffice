@@ -1,51 +1,98 @@
-export class AgodaPage {
-  searchFlight(departure, destination, date) {
-    cy.get("#flight-origin").clear().type(departure);
-    cy.get("#flight-destination").clear().type(destination);
-    cy.get("#flight-departure-date").click();
-    cy.get(`[data-date='${date}']`).click();
-    cy.get("#search-button").click();
+class AgodaPage {
+  goToFlightTab() {
+    cy.get("#tab-flight-tab").click();
   }
 
-  selectEarliestFlight(airline) {
-    cy.get(".flight-result", { timeout: 15000 })
+  searchFlight(from, to, date) {
+    cy.get("#flight-origin-search-input").type(from);
+    cy.contains("li", from).click();
+    cy.get("#flight-destination-search-input").type(to);
+    cy.contains("li", to).click();
+    cy.get(
+      '[aria-label="Fri May 30 2025 "] > .a4cbd-box > .PriceSurgePicker-Day__container > .PriceSurgePicker-Day__circle'
+    ).click();
+    cy.get('[data-test="SearchButtonBox"]').click();
+  }
+
+  selectFlightByAirline(airline) {
+    cy.get("[data-testid='web-refresh-flights-card']", { timeout: 20000 })
       .contains(airline)
-      .parents(".flight-result")
+      .parents("[data-testid='web-refresh-flights-card']")
       .first()
-      .within(() => {
-        cy.get(".departure-time").invoke("text").as("selectedDeparture");
-        cy.get(".arrival-time").invoke("text").as("selectedArrival");
-        cy.get(".total-price").invoke("text").as("selectedPrice");
-        cy.get("button.select-flight").click();
-      });
+      .click();
+    cy.get('[style="width: 104px;"] > .a5d86-bg-product-primary').click();
   }
 
-  fillPassengerDetails(firstName, lastName, email) {
-    cy.get("#first-name").type(firstName);
-    cy.get("#last-name").type(lastName);
-    cy.get("#email").type(email);
-    cy.get("#confirm-passenger").click();
-
-    cy.wrap(`${firstName} ${lastName}`).as("fullPassengerName");
+  fillContactDetails({ firstName, lastName, email, phone }) {
+    cy.get('[data-testid="contact.contactFirstName"]').type(firstName);
+    cy.get('[data-testid="contact.contactLastName"]').type(lastName);
+    cy.get('[data-testid="contact.contactEmail"]').type(email);
+    cy.get(
+      '[data-testid="contact.contactPhoneNumber-PhoneNumberDataTestId"]'
+    ).type(phone);
+    // cy.get('[data-testid="0"]').click();
   }
 
-  expectPriceAndPassengerMatch() {
-    cy.get("@selectedPrice").then((price) => {
-      cy.get(".summary-total-price").should("contain", price.trim());
-    });
+  fillPassengerDetails({
+    firstName,
+    lastName,
+    dob,
+    nationality,
+    passportNumber,
+    passportCountry,
+    passportExpiry,
+  }) {
+    cy.get('[data-testid="flight.forms.i0.units.i0.passengerFirstName"]').type(
+      firstName
+    );
+    cy.get('[data-testid="flight.forms.i0.units.i0.passengerLastName"]').type(
+      lastName
+    );
+    cy.get('[data-testid="0"]').click();
 
-    cy.get("@fullPassengerName").then((name) => {
-      cy.get(".summary-passenger").should("contain", name.trim());
-    });
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passengerDateOfBirth-DateInputDataTestId"]'
+    ).type(dob.day);
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passengerDateOfBirth-MonthInputDataTestId"]'
+    ).click();
+    cy.contains("label", dob.month).click();
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passengerDateOfBirth-YearInputDataTestId"]'
+    ).type(dob.year);
+
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passengerNationality"]'
+    ).click();
+    cy.contains("label", nationality).click();
+
+    cy.get('[data-testid="flight.forms.i0.units.i0.passportNumber"]').type(
+      passportNumber
+    );
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passportCountryOfIssue"]'
+    ).click();
+    cy.contains("label", passportCountry).click();
+
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passportExpiryDate-DateInputDataTestId"]'
+    ).type(passportExpiry.day);
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passportExpiryDate-MonthInputDataTestId"]'
+    ).click();
+    cy.contains("label", passportExpiry.month).click();
+    cy.get(
+      '[data-testid="flight.forms.i0.units.i0.passportExpiryDate-YearInputDataTestId"]'
+    ).type(passportExpiry.year);
+
+    cy.contains("Continue to add-ons").click();
   }
 
-  expectDepartureAndArrivalTimeMatch() {
-    cy.get("@selectedDeparture").then((depTime) => {
-      cy.get(".summary-departure-time").should("contain", depTime.trim());
-    });
-
-    cy.get("@selectedArrival").then((arrTime) => {
-      cy.get(".summary-arrival-time").should("contain", arrTime.trim());
-    });
+  verifyFlightTime(airlines) {
+    cy.get(
+      '[data-testid="kite-box"] > .Typographystyled__TypographyStyled-sc-j18mtu-0'
+    ).should("contain.text", airlines);
   }
 }
+
+export default new AgodaPage();
